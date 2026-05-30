@@ -56,18 +56,29 @@ export default function AdminPage() {
     return new Date(iso).toLocaleString("tr-TR");
   }
 
-  function formatSize(bytes: number) {
-    return (bytes / 1024 / 1024).toFixed(1) + " MB";
-  }
+  const bg = "linear-gradient(160deg, #1a0a00 0%, #2d1200 40%, #1a0a00 100%)";
+  const gold = "#c9a84c";
 
   if (!authed) {
     return (
-      <main className="flex items-center justify-center min-h-screen px-4">
+      <main
+        className="flex items-center justify-center min-h-screen px-4"
+        style={{ background: bg }}
+      >
         <div className="max-w-sm w-full space-y-6 text-center">
-          <h1 className="text-3xl font-light text-stone-800">
-            Devran <span className="text-amber-600">&</span> Merve
+          <div
+            className="w-16 h-16 rounded-full flex items-center justify-center text-2xl mx-auto"
+            style={{ background: "linear-gradient(135deg, #c9a84c, #f0d080)", boxShadow: "0 0 24px rgba(201,168,76,0.3)" }}
+          >
+            💍
+          </div>
+          <h1
+            className="text-3xl font-light"
+            style={{ color: "#f5e6c0", fontFamily: "Georgia, serif" }}
+          >
+            Merve <span style={{ color: gold }}>&</span> Devran
           </h1>
-          <p className="text-stone-500 text-sm">Admin Paneli</p>
+          <p className="text-sm" style={{ color: "#9e8060" }}>Admin Paneli</p>
 
           <div className="space-y-3">
             <input
@@ -76,68 +87,93 @@ export default function AdminPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && login()}
-              className="w-full px-4 py-3 border border-amber-200 rounded-xl bg-white focus:outline-none focus:border-amber-400 text-stone-700"
+              className="w-full px-4 py-3 rounded-xl text-sm outline-none"
+              style={{
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid #c9a84c44",
+                color: "#f5e6c0",
+              }}
             />
             <button
               onClick={login}
               disabled={loading || !password}
-              className="w-full py-3 rounded-full bg-amber-600 text-white font-medium hover:bg-amber-700 disabled:opacity-40 transition-colors"
+              className="w-full py-3 rounded-full font-medium tracking-widest text-sm disabled:opacity-40 transition-all"
+              style={{
+                background: "linear-gradient(135deg, #c9a84c 0%, #f0d080 50%, #c9a84c 100%)",
+                color: "#1a0a00",
+                letterSpacing: "0.15em",
+              }}
             >
-              {loading ? "Giriş yapılıyor..." : "Giriş Yap"}
+              {loading ? "Giriş yapılıyor..." : "GİRİŞ YAP"}
             </button>
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className="text-sm" style={{ color: "#e07070" }}>{error}</p>}
         </div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen px-4 py-8">
+    <main className="min-h-screen px-4 py-8" style={{ background: bg }}>
       <div className="max-w-5xl mx-auto space-y-8">
+
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-light text-stone-800">
-              Devran <span className="text-amber-600">&</span> Merve — Admin
+            <h1
+              className="text-2xl font-light"
+              style={{ color: "#f5e6c0", fontFamily: "Georgia, serif" }}
+            >
+              Merve <span style={{ color: gold }}>&</span> Devran
+              <span className="text-base ml-2" style={{ color: "#9e8060" }}>— Admin</span>
             </h1>
-            <p className="text-stone-500 text-sm">{photos.length} fotoğraf</p>
+            <p className="text-sm mt-0.5" style={{ color: "#9e8060" }}>{photos.length} fotoğraf</p>
           </div>
           <button
             onClick={refresh}
             disabled={loading}
-            className="px-4 py-2 rounded-full border border-amber-200 text-amber-700 text-sm hover:bg-amber-50 transition-colors"
+            className="px-4 py-2 rounded-full text-sm transition-all"
+            style={{ border: "1px solid #c9a84c44", color: gold }}
           >
             {loading ? "..." : "Yenile"}
           </button>
         </div>
 
-        {/* QR Code */}
-        <div className="bg-white rounded-2xl p-6 border border-amber-100 flex flex-col sm:flex-row items-center gap-6">
-          <img
-            src={`/api/qr?url=${encodeURIComponent(siteUrl)}`}
-            alt="QR Kod"
-            className="w-32 h-32"
-          />
+        {/* QR */}
+        <div
+          className="rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6"
+          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid #c9a84c22" }}
+        >
+          <div
+            className="p-2 rounded-xl"
+            style={{ background: "#fdf8f0" }}
+          >
+            <img
+              src={`/api/qr?url=${encodeURIComponent(siteUrl)}`}
+              alt="QR Kod"
+              className="w-28 h-28"
+            />
+          </div>
           <div className="space-y-1 text-center sm:text-left">
-            <p className="font-medium text-stone-700">Misafir Yükleme QR Kodu</p>
-            <p className="text-stone-500 text-sm break-all">{siteUrl}</p>
-            <p className="text-stone-400 text-xs">
+            <p className="font-medium" style={{ color: "#f5e6c0" }}>Misafir Yükleme QR Kodu</p>
+            <p className="text-sm break-all" style={{ color: "#9e8060" }}>{siteUrl}</p>
+            <p className="text-xs" style={{ color: "#7a5c3a" }}>
               Bu kodu davetlilerle paylaşın. Okutunca fotoğraf yükleme sayfası açılır.
             </p>
             <a
               href={`/api/qr?url=${encodeURIComponent(siteUrl)}`}
               download="qr-kod.svg"
-              className="inline-block mt-2 text-amber-600 text-sm hover:underline"
+              className="inline-block mt-1 text-sm hover:underline"
+              style={{ color: gold }}
             >
               QR kodu indir (SVG)
             </a>
           </div>
         </div>
 
-        {/* Photos Grid */}
+        {/* Grid */}
         {photos.length === 0 ? (
-          <div className="text-center py-16 text-stone-400">
+          <div className="text-center py-16" style={{ color: "#7a5c3a" }}>
             Henüz fotoğraf yüklenmemiş
           </div>
         ) : (
@@ -145,7 +181,8 @@ export default function AdminPage() {
             {photos.map((photo) => (
               <div
                 key={photo.url}
-                className="group relative aspect-square rounded-xl overflow-hidden bg-stone-100 cursor-pointer"
+                className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer"
+                style={{ border: "1px solid #c9a84c22" }}
                 onClick={() => setSelected(photo.url)}
               >
                 <img
@@ -153,9 +190,9 @@ export default function AdminPage() {
                   alt=""
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors" />
                 <div className="absolute bottom-0 left-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <p className="text-white text-xs bg-black/50 rounded px-1">
+                  <p className="text-white text-xs bg-black/60 rounded px-1">
                     {formatDate(photo.uploadedAt)}
                   </p>
                 </div>
@@ -168,7 +205,8 @@ export default function AdminPage() {
       {/* Lightbox */}
       {selected && (
         <div
-          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 flex items-center justify-center z-50 p-4"
+          style={{ background: "rgba(0,0,0,0.92)" }}
           onClick={() => setSelected(null)}
         >
           <img
@@ -178,7 +216,8 @@ export default function AdminPage() {
             onClick={(e) => e.stopPropagation()}
           />
           <button
-            className="absolute top-4 right-4 text-white text-3xl leading-none hover:text-amber-300"
+            className="absolute top-4 right-4 text-3xl leading-none transition-colors"
+            style={{ color: "#f5e6c0" }}
             onClick={() => setSelected(null)}
           >
             ×
@@ -186,7 +225,8 @@ export default function AdminPage() {
           <a
             href={selected}
             download
-            className="absolute bottom-4 right-4 bg-amber-600 text-white px-4 py-2 rounded-full text-sm hover:bg-amber-700"
+            className="absolute bottom-4 right-4 px-5 py-2 rounded-full text-sm font-medium"
+            style={{ background: "linear-gradient(135deg, #c9a84c, #f0d080)", color: "#1a0a00" }}
             onClick={(e) => e.stopPropagation()}
           >
             İndir
