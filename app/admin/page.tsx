@@ -34,6 +34,7 @@ function Lightbox({
   isVideo: boolean;
 }) {
   const item = items[index];
+  const [showArrows, setShowArrows] = useState(false);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -52,7 +53,10 @@ function Lightbox({
       onClick={onClose}
     >
       {/* Media */}
-      <div className="relative flex items-center justify-center w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="relative flex items-center justify-center w-full max-w-4xl"
+        onClick={(e) => { e.stopPropagation(); setShowArrows((v) => !v); }}
+      >
         {isVideo ? (
           <video
             src={item.url}
@@ -70,20 +74,20 @@ function Lightbox({
         )}
 
         {/* Prev */}
-        {items.length > 1 && (
+        {items.length > 1 && showArrows && (
           <button
-            className="absolute left-0 -translate-x-12 text-3xl transition-colors"
-            style={{ color: "#f5e6c0" }}
+            className="absolute left-0 -translate-x-1 flex items-center justify-center w-10 h-10 rounded-full text-2xl transition-all"
+            style={{ background: "rgba(201,168,76,0.15)", color: "#f5e6c0", border: "1px solid #c9a84c44" }}
             onClick={(e) => { e.stopPropagation(); onPrev(); }}
           >
             ‹
           </button>
         )}
         {/* Next */}
-        {items.length > 1 && (
+        {items.length > 1 && showArrows && (
           <button
-            className="absolute right-0 translate-x-12 text-3xl transition-colors"
-            style={{ color: "#f5e6c0" }}
+            className="absolute right-0 translate-x-1 flex items-center justify-center w-10 h-10 rounded-full text-2xl transition-all"
+            style={{ background: "rgba(201,168,76,0.15)", color: "#f5e6c0", border: "1px solid #c9a84c44" }}
             onClick={(e) => { e.stopPropagation(); onNext(); }}
           >
             ›
@@ -97,9 +101,7 @@ function Lightbox({
         style={{ background: "rgba(255,255,255,0.06)", border: "1px solid #c9a84c22" }}
         onClick={(e) => e.stopPropagation()}
       >
-        <p style={{ color: "#f5e6c0" }}>
-          {item.name} {item.surname}
-        </p>
+        <p style={{ color: "#f5e6c0" }}>{item.name} {item.surname}</p>
         {item.note && <p style={{ color: "#9e8060" }}>{item.note}</p>}
         <p className="text-xs" style={{ color: "#7a5c3a" }}>{formatDate(item.uploadedAt)}</p>
       </div>
@@ -149,12 +151,20 @@ function MediaGrid({ items, isVideo }: { items: MediaItem[]; isVideo: boolean })
 
   return (
     <>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+      <div
+        className="flex gap-3 overflow-x-auto pb-2"
+        style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}
+      >
         {items.map((item, i) => (
           <div
             key={item.url}
-            className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer"
-            style={{ border: "1px solid #c9a84c22" }}
+            className="group relative flex-shrink-0 rounded-xl overflow-hidden cursor-pointer"
+            style={{
+              width: "200px",
+              height: "200px",
+              border: "1px solid #c9a84c22",
+              scrollSnapAlign: "start",
+            }}
             onClick={() => setLightboxIndex(i)}
           >
             {isVideo ? (
