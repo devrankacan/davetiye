@@ -77,7 +77,7 @@ export default function UploadPage() {
             Nişan Hatırası
           </p>
           <h1
-            className="text-5xl font-light"
+            className="text-3xl font-light whitespace-nowrap"
             style={{
               color: "#f5e6c0",
               textShadow: "0 2px 18px rgba(201,168,76,0.25)",
