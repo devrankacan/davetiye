@@ -235,7 +235,7 @@ export default function UploadPage() {
           </div>
         )}
 
-        <p className="text-xs" style={{ color: "#4a3520" }}>Merve & Devran • 10/2026</p>
+        <p className="text-xs" style={{ color: "#4a3520" }}>Merve & Devran • 10/10/2026</p>
       </div>
     </main>
   );
