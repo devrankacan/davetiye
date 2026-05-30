@@ -1,9 +1,10 @@
-import { put } from "@vercel/blob";
+import { writeFile, mkdir } from "fs/promises";
+import { existsSync } from "fs";
+import path from "path";
 import { NextRequest, NextResponse } from "next/server";
 
-export const runtime = "edge";
-
 const MAX_SIZE = 20 * 1024 * 1024; // 20 MB
+const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
 
 export async function POST(req: NextRequest) {
   const form = await req.formData();
@@ -27,14 +28,16 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const timestamp = Date.now();
-  const ext = file.name.split(".").pop() || "jpg";
-  const filename = `nissan/${timestamp}-${Math.random().toString(36).slice(2)}.${ext}`;
+  if (!existsSync(UPLOAD_DIR)) {
+    await mkdir(UPLOAD_DIR, { recursive: true });
+  }
 
-  const blob = await put(filename, file, {
-    access: "public",
-    contentType: file.type,
-  });
+  const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
+  const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+  const filepath = path.join(UPLOAD_DIR, filename);
 
-  return NextResponse.json({ url: blob.url });
+  const buffer = Buffer.from(await file.arrayBuffer());
+  await writeFile(filepath, buffer);
+
+  return NextResponse.json({ url: `/uploads/${filename}` });
 }
