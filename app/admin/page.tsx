@@ -66,12 +66,6 @@ export default function AdminPage() {
         style={{ background: bg }}
       >
         <div className="max-w-sm w-full space-y-6 text-center">
-          <div
-            className="w-16 h-16 rounded-full flex items-center justify-center text-2xl mx-auto"
-            style={{ background: "linear-gradient(135deg, #c9a84c, #f0d080)", boxShadow: "0 0 24px rgba(201,168,76,0.3)" }}
-          >
-            💍
-          </div>
           <h1
             className="text-3xl font-light"
             style={{ color: "#f5e6c0", fontFamily: "Georgia, serif" }}

@@ -49,19 +49,6 @@ export default function UploadPage() {
     >
       <div className="max-w-md w-full text-center space-y-7">
 
-        {/* Monogram / ornament */}
-        <div className="flex justify-center mb-2">
-          <div
-            className="w-20 h-20 rounded-full flex items-center justify-center text-3xl"
-            style={{
-              background: "linear-gradient(135deg, #c9a84c 0%, #f0d080 50%, #c9a84c 100%)",
-              boxShadow: "0 0 32px rgba(201,168,76,0.35)",
-            }}
-          >
-            💍
-          </div>
-        </div>
-
         {/* Başlık */}
         <div className="space-y-2">
           <p
