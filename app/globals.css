@@ -1,12 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fdf8f4;
-  --foreground: #3d2c1e;
+  --cream: #f8f3eb;
+  --cream-dark: #ede5d5;
+  --green: #2d4a2d;
+  --green-mid: #4a6b4a;
+  --green-light: #7a9b7a;
+  --gold: #b8953a;
+  --gold-light: #d4aa50;
 }
 
+* { box-sizing: border-box; }
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: "Georgia", serif;
+  background: var(--cream);
+  color: var(--green);
+  font-family: var(--font-cormorant), Georgia, serif;
+  -webkit-font-smoothing: antialiased;
 }
