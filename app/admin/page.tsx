@@ -210,7 +210,7 @@ export default function AdminPage() {
   if (!authed) {
     return (
       <main style={{
-        minHeight: "100dvh", background: C.cream,
+        minHeight: "100dvh", background: `url('/bg.png') center center / cover no-repeat fixed`,
         display: "flex", alignItems: "center", justifyContent: "center", padding: "24px 20px",
       }}>
         <div style={{
@@ -251,7 +251,7 @@ export default function AdminPage() {
 
   return (
     <main style={{
-      minHeight: "100dvh", background: C.cream,
+      minHeight: "100dvh", background: `url('/bg.png') center center / cover no-repeat fixed`,
       padding: "env(safe-area-inset-top,16px) 16px env(safe-area-inset-bottom,24px)",
       boxSizing: "border-box",
     }}>

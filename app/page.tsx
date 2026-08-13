@@ -66,7 +66,7 @@ export default function UploadPage() {
   return (
     <main style={{
       minHeight: "100dvh",
-      background: C.cream,
+      background: `url('/bg.png') center center / cover no-repeat fixed`,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -76,11 +76,12 @@ export default function UploadPage() {
 
         {/* Çerçeve kartı */}
         <div style={{
-          background: "#fff",
+          background: "rgba(255,255,255,0.88)",
           border: `1px solid ${C.creamDark}`,
           borderRadius: 4,
           padding: "32px 28px 28px",
-          boxShadow: "0 2px 24px rgba(45,74,45,0.07)",
+          boxShadow: "0 4px 32px rgba(45,74,45,0.10)",
+          backdropFilter: "blur(2px)",
           display: "flex",
           flexDirection: "column",
           gap: 20,
