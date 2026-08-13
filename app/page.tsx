@@ -141,14 +141,14 @@ export default function UploadPage() {
           {/* Ad / Soyad */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
             <div>
-              <label style={{ display: "block", color: C.greenMid, fontSize: 12, marginBottom: 5, letterSpacing: "0.05em" }}>
+              <label style={{ display: "block", color: C.green, fontSize: 14, marginBottom: 6, letterSpacing: "0.03em", fontWeight: 500 }}>
                 Ad <span style={{ color: C.gold }}>*</span>
               </label>
               <input type="text" placeholder="Adınız" value={name}
                 onChange={(e) => setName(e.target.value)} autoComplete="given-name" style={inp} />
             </div>
             <div>
-              <label style={{ display: "block", color: C.greenMid, fontSize: 12, marginBottom: 5, letterSpacing: "0.05em" }}>
+              <label style={{ display: "block", color: C.green, fontSize: 14, marginBottom: 6, letterSpacing: "0.03em", fontWeight: 500 }}>
                 Soyad <span style={{ color: C.gold }}>*</span>
               </label>
               <input type="text" placeholder="Soyadınız" value={surname}
@@ -158,8 +158,8 @@ export default function UploadPage() {
 
           {/* Not */}
           <div>
-            <label style={{ display: "block", color: C.greenMid, fontSize: 12, marginBottom: 5, letterSpacing: "0.05em" }}>
-              Not <span style={{ color: C.greenLight, fontSize: 11 }}>(isteğe bağlı)</span>
+            <label style={{ display: "block", color: C.green, fontSize: 14, marginBottom: 6, letterSpacing: "0.03em", fontWeight: 500 }}>
+              Not <span style={{ color: C.greenMid, fontSize: 12 }}>(isteğe bağlı)</span>
             </label>
             <textarea placeholder="Bir mesaj bırakmak ister misiniz?" value={note}
               onChange={(e) => setNote(e.target.value)} rows={2}
