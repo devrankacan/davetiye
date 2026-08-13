@@ -233,7 +233,7 @@ export default function AdminPage() {
           <input type="password" placeholder="Şifre" value={password}
             onChange={(e) => setPassword(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && login()} style={inp} />
-          <button onClick={login} disabled={loading || !password} style={{
+          <button type="button" onClick={login} disabled={loading || !password} style={{
             padding: "14px", borderRadius: 50, border: "none",
             background: `linear-gradient(135deg,${C.gold},${C.goldLight})`,
             color: "#fff", fontWeight: 600, fontSize: 13, letterSpacing: "0.15em",
