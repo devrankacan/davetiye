@@ -2,6 +2,7 @@ import { writeFile, mkdir } from "fs/promises";
 import { existsSync } from "fs";
 import path from "path";
 import { NextRequest, NextResponse } from "next/server";
+import { sendUploadNotification } from "@/lib/sendMail";
 
 const MAX_IMAGE = 50 * 1024 * 1024;  // 50 MB
 const MAX_VIDEO = 500 * 1024 * 1024; // 500 MB
@@ -51,5 +52,13 @@ export async function POST(req: NextRequest) {
   await writeFile(path.join(dir, `${basename}.json`), JSON.stringify(meta));
 
   const folder = isImage ? "photos" : "videos";
+
+  sendUploadNotification({
+    name, surname, note,
+    type: isImage ? "fotoğraf" : "video",
+    fileCount: 1,
+    uploadedAt: meta.uploadedAt,
+  }).catch(() => {});
+
   return NextResponse.json({ url: `/uploads/${folder}/${filename}` });
 }
